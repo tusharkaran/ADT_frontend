@@ -1,11 +1,14 @@
-/* tickets.css */
+/* Tickets.css */
 
 .container {
     padding: 1rem;
 }
 
 .header {
-    font-size: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
     font-weight: bold;
     margin-bottom: 1rem;
     color: white;
@@ -16,12 +19,31 @@
     padding: 0.5rem 1rem;
     border-radius: 0.25rem;
     display: inline-block;
-    margin-bottom: 1rem;
 }
 
 .total-tickets {
     color: white;
     font-weight: bold;
+}
+
+.compress-all-btn {
+    background-color: #1e40af;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.compress-all-btn:disabled {
+    background-color: grey;
+    cursor: not-allowed;
+}
+
+.compress-all-btn.enabled:hover {
+    background-color: #000000;
+    border-color: #1e40af;
 }
 
 .ticket-card {
@@ -36,22 +58,19 @@
     flex-wrap: nowrap;
     justify-content: space-between;
     align-items: center;
+    font-size: 14px;
 }
 
 .ticket-card .info {
     display: flex;
     flex-wrap: nowrap;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: center;
     width: 100%;
 }
 
 .ticket-card .info .info-item {
     margin-right: 2rem;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    min-width: 150px; /* Ensure consistent width */
 }
 
 .ticket-card .info .info-item .key {
@@ -86,12 +105,6 @@
     border-color: #1e40af;
 }
 
-.ticket-card .select {
-    border: 1px solid #4a4a4a;
-    margin-left: 1rem;
-    font-size: 14px;
-    padding: 0.5rem;
-    border-radius: 0.25rem;
-    background-color: #232323;
-    color: white;
+.ticket-card .btn.view-btn {
+    margin-left: 0;
 }
