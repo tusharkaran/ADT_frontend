@@ -12,6 +12,7 @@ const ActiveTickets = () => {
                 console.log('API Response:', response.data); // Log the API response
                 response.data.forEach(ticket => {
                     console.log('Ticket _id:', ticket._id); // Log each ticket's _id
+                    
                 });
                 setTickets(response.data);
             })
