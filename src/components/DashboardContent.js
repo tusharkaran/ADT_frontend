@@ -6,16 +6,16 @@ import Segmentation from './Segmentation';
 import Satisfaction from './Satisfaction';
 import AddComponent from './AddComponent';
 import Icon from './Icon';
-import IconButton from './IconButton'
+import IconButton from './IconButton';
 
 const DashboardContent = ({ onSidebarHide }) => {
-    const [employeeData, setEmployeeData] = useState([]);
+    const [compressionData, setCompressionData] = useState([]);
 
     useEffect(() => {
         fetch('http://localhost:8000/api/analytics/GetAlgoDetails')
             .then(response => response.json())
-            .then(data => setEmployeeData(data))
-            .catch(error => console.error('Error fetching employee data:', error));
+            .then(data => setCompressionData(Object.values(data)))
+            .catch(error => console.error('Error fetching compression data:', error));
     }, []);
 
     return (
@@ -27,7 +27,6 @@ const DashboardContent = ({ onSidebarHide }) => {
                             <div className="flex items-center">
                                 <div className="text-3xl font-bold text-white">Compression Analysis</div>
                             </div>
-
                         </div>
                         <IconButton
                             icon="res-react-dash-sidebar-open"
@@ -48,8 +47,8 @@ const DashboardContent = ({ onSidebarHide }) => {
                         </form>
                     </div>
                 </div>
-                {employeeData && employeeData.map((employee) => (
-                    <NameCard key={employee.id} {...employee} />
+                {compressionData && compressionData.map((algorithm) => (
+                    <NameCard key={algorithm.name} {...algorithm} />
                 ))}
                 <div className="w-full p-2 lg:w-2/3">
                     <div className="rounded-lg bg-card sm:h-80 h-60">
