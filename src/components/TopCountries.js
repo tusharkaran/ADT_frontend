@@ -9,11 +9,11 @@ const TopCountries = () => {
             .then(response => response.json())
             .then(data => {
                 // Map the response data to the structure expected by the component
-                const formattedData = data.map(({ id, name, avgCompressionTime }) => ({
-                    id,
-                    name,
-                    rise: avgCompressionTime < 15000, // example condition, adjust as needed
-                    value: avgCompressionTime,
+                const formattedData = Object.values(data).map((algo, index) => ({
+                    id: index + 1,
+                    name: algo.name,
+                    rise: algo.avgCompressionTime < 15000, // example condition, adjust as needed
+                    value: algo.avgCompressionTime,
                 }));
                 setCountryData(formattedData);
             })
@@ -26,10 +26,9 @@ const TopCountries = () => {
                 <div className="text-white font-bold">Compression Time</div>
                 <Icon path="res-react-dash-plus" className="w-5 h-5" />
             </div>
-            {countryData.map(({ name, rise, value, id }) => (
+            {countryData.map(({ id, name, rise, value }) => (
                 <div className="flex items-center mt-3" key={id}>
                     <div className="">{id}</div>
-                    {/* <Image path={`res-react-dash-flag-${id}`} className="ml-2 w-6 h-6" /> */}
                     <div className="ml-2">{name}</div>
                     <div className="flex-grow" />
                     <div className="">{`${value.toLocaleString()} ns`}</div>
