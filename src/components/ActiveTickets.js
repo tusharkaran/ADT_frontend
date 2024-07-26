@@ -10,7 +10,7 @@ const ActiveTickets = () => {
     const [selectedTicketContent, setSelectedTicketContent] = useState('');
     const [selectedTicketID, setSelectedTicketID] = useState('');
 
-    useEffect(() => {
+    const fetchTickets = () => {
         axios.get('http://localhost:8000/api/ticket/getAllTickets')
             .then(response => {
                 setTickets(response.data);
@@ -18,6 +18,10 @@ const ActiveTickets = () => {
             .catch(error => {
                 console.error('There was an error fetching the tickets!', error);
             });
+    };
+
+    useEffect(() => {
+        fetchTickets();
     }, []);
 
     const handleSelectTicket = (ticketID) => {
@@ -29,9 +33,11 @@ const ActiveTickets = () => {
     };
 
     const handleCompress = (ticketID) => {
-        axios.post('http://localhost:8000/api/ticket/brotliCompress', { ticketID })
+        const ticket = tickets.find(t => t._id === ticketID);
+        axios.post('http://localhost:8000/api/ticket/createZSTDTicket', ticket)
             .then(response => {
                 alert(`Ticket ${ticketID} compressed successfully!`);
+                fetchTickets(); // Refresh the list of tickets
             })
             .catch(error => {
                 console.error('There was an error compressing the ticket!', error);
@@ -39,18 +45,20 @@ const ActiveTickets = () => {
             });
     };
 
-    const handleCompressAll = () => {
-        if (selectedTickets.length > 0) {
-            axios.post('http://localhost:8000/api/ticket/compressAllTickets', { ticketIDs: selectedTickets })
-                .then(response => {
-                    alert('Tickets compressed successfully!');
-                })
-                .catch(error => {
-                    console.error('There was an error compressing the tickets!', error);
-                    alert('Failed to compress tickets.');
-                });
-        }
-    };
+    // const handleCompressAll = () => {
+    //     if (selectedTickets.length > 0) {
+    //         const selectedTicketObjects = tickets.filter(ticket => selectedTickets.includes(ticket._id));
+    //         axios.post('http://localhost:8000/api/ticket/compressAllTickets', { tickets: selectedTicketObjects })
+    //             .then(response => {
+    //                 alert('Tickets compressed successfully!');
+    //                 fetchTickets(); // Refresh the list of tickets
+    //             })
+    //             .catch(error => {
+    //                 console.error('There was an error compressing the tickets!', error);
+    //                 alert('Failed to compress tickets.');
+    //             });
+    //     }
+    // };
 
     const handleView = (ticketID) => {
         axios.get(`http://localhost:8000/api/ticket/getTicket/${ticketID}`)
@@ -78,23 +86,23 @@ const ActiveTickets = () => {
                 <div className="total-tickets-box">
                     <p className="total-tickets">Total Tickets: {tickets.length}</p>
                 </div>
-                <button
+                {/* <button
                     className={`compress-all-btn ${selectedTickets.length > 0 ? 'enabled' : ''}`}
                     onClick={handleCompressAll}
                     disabled={selectedTickets.length === 0}
                 >
                     Compress All
-                </button>
+                </button> */}
             </div>
             <div className="space-y-4">
                 {tickets.length > 0 ? tickets.map(ticket => (
                     <div key={ticket._id} className="ticket-card">
-                        <input
+                        {/* <input
                             type="checkbox"
                             className="select-checkbox"
                             checked={selectedTickets.includes(ticket._id)}
                             onChange={() => handleSelectTicket(ticket._id)}
-                        />
+                        /> */}
                         <div className="info">
                             <div className="info-item">
                                 <div className="key">TicketID:</div>

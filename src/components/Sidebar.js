@@ -9,8 +9,8 @@ import Image from './Image';
 const sidebarItems = [
     [
         { id: '0', title: 'Dashboard', notifications: false },
-        { id: '1', title: 'Active Tickets', notifications: false },
-        { id: '2', title: 'Tickets', notifications: 6 },
+        { id: '1', title: 'Archival Tickets', notifications: false },
+        { id: '2', title: 'Tickets', notifications: false },
     ],
 ];
 

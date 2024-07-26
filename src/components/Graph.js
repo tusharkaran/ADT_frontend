@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
     LineChart,
     Line,
@@ -10,14 +10,7 @@ import {
     ResponsiveContainer,
 } from "recharts";
 import Icon from './Icon';
-
-const graphData = [
-    { name: '5KB', ZSTD: 63, LZMA: 3, BROTLI: 2 },
-    { name: '10KB', ZSTD: 10, LZMA: 7, BROTLI: 3 },
-    { name: '15KB', ZSTD: 15, LZMA: 11, BROTLI: 6 },
-    { name: '20KB', ZSTD: 15, LZMA: 16, BROTLI: 18 },
-    { name: '25KB', ZSTD: 20, LZMA: 21, BROTLI: 22 },
-];
+import axios from 'axios';
 
 const CustomTooltip = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
@@ -28,9 +21,9 @@ const CustomTooltip = ({ active, payload, label }) => {
                     <Icon path="res-react-dash-options" className="w-2 h-2" />
                 </div>
                 <div className="tooltip-body text-center p-3">
-                    <div className="text-white font-bold">ZSTD: {payload.find(p => p.dataKey === 'ZSTD')?.value}KB</div>
-                    <div className="">LZMA: {payload.find(p => p.dataKey === 'LZMA')?.value}KB</div>
-                    <div className="">BROTLI: {payload.find(p => p.dataKey === 'BROTLI')?.value}KB</div>
+                    <div className="text-white font-bold">Compression Ratio: {payload.find(p => p.dataKey === 'avgCompressionRatio')?.value}</div>
+                    <div className="">Compression Time: {payload.find(p => p.dataKey === 'avgCompressionTime')?.value}s</div>
+                    <div className="">Decompression Time: {payload.find(p => p.dataKey === 'avgDecompressionTime')?.value}s</div>
                 </div>
             </div>
         );
@@ -40,6 +33,26 @@ const CustomTooltip = ({ active, payload, label }) => {
 };
 
 const Graph = () => {
+    const [data, setData] = useState([]);
+
+    useEffect(() => {
+        axios.get('http://localhost:8000/api/analytics/monthlyCompressionStats')
+            .then(response => {
+                if (response.data.msg === "success") {
+                    const formattedData = response.data.monthlyStats.map(stat => ({
+                        name: stat._id,
+                        avgCompressionRatio: stat.avgCompressionRatio,
+                        avgCompressionTime: stat.avgCompressionTime,
+                        avgDecompressionTime: stat.avgDecompressionTime
+                    }));
+                    setData(formattedData);
+                }
+            })
+            .catch(error => {
+                console.error("Error fetching data: ", error);
+            });
+    }, []);
+
     return (
         <div className="flex p-4 h-full flex-col">
             <div className="">
@@ -50,11 +63,11 @@ const Graph = () => {
                     <div className="ml-2">Actual vs Compressed Size</div>
                     <div className="ml-6 w-5 h-5 flex justify-center items-center rounded-full icon-background">?</div>
                 </div>
-                <div className="font-bold ml-5">Sizes in KB</div>
+                <div className="font-bold ml-5">Time in millisecond</div>
             </div>
             <div className="flex-grow">
                 <ResponsiveContainer width="100%" height="100%">
-                    <LineChart width={500} height={300} data={graphData}>
+                    <LineChart width={500} height={300} data={data}>
                         <defs>
                             <linearGradient id="paint0_linear" x1="0" y1="0" x2="1" y2="0">
                                 <stop stopColor="#6B8DE3" />
@@ -74,9 +87,9 @@ const Graph = () => {
                         <YAxis axisLine={false} tickLine={false} tickMargin={10} />
                         <Tooltip content={<CustomTooltip />} cursor={false} />
                         <Legend />
-                        <Line type="monotone" dataKey="ZSTD" stroke="url(#paint0_linear)" strokeWidth="3" dot={false} />
-                        <Line type="monotone" dataKey="LZMA" stroke="url(#paint1_linear)" strokeWidth="3" dot={false} />
-                        <Line type="monotone" dataKey="BROTLI" stroke="url(#paint2_linear)" strokeWidth="3" dot={false} />
+                        <Line type="monotone" dataKey="avgCompressionRatio" stroke="url(#paint0_linear)" strokeWidth="3" dot={false} />
+                        <Line type="monotone" dataKey="avgCompressionTime" stroke="url(#paint1_linear)" strokeWidth="3" dot={false} />
+                        <Line type="monotone" dataKey="avgDecompressionTime" stroke="url(#paint2_linear)" strokeWidth="3" dot={false} />
                     </LineChart>
                 </ResponsiveContainer>
             </div>

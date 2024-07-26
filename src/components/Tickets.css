@@ -1,17 +1,15 @@
-/* Tickets.css */
-
 .container {
     padding: 1rem;
 }
 
 .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 14px;
+    font-size: 1.5rem;
     font-weight: bold;
     margin-bottom: 1rem;
     color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .total-tickets-box {
@@ -19,31 +17,12 @@
     padding: 0.5rem 1rem;
     border-radius: 0.25rem;
     display: inline-block;
+    margin-bottom: 1rem;
 }
 
 .total-tickets {
     color: white;
     font-weight: bold;
-}
-
-.compress-all-btn {
-    background-color: #1e40af;
-    color: white;
-    padding: 0.5rem 1rem;
-    border-radius: 0.25rem;
-    border: none;
-    cursor: pointer;
-    font-size: 14px;
-}
-
-.compress-all-btn:disabled {
-    background-color: grey;
-    cursor: not-allowed;
-}
-
-.compress-all-btn.enabled:hover {
-    background-color: #000000;
-    border-color: #1e40af;
 }
 
 .ticket-card {
@@ -58,7 +37,6 @@
     flex-wrap: nowrap;
     justify-content: space-between;
     align-items: center;
-    font-size: 14px;
 }
 
 .ticket-card .info {
