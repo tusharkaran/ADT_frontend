@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Icon from './Icon';
 
-const TopCountries = () => {
+const TicketAnalysis = () => {
     const [countryData, setCountryData] = useState([]);
 
     useEffect(() => {
@@ -53,4 +53,4 @@ const TopCountries = () => {
     );
 };
 
-export default TopCountries;
+export default TicketAnalysis;

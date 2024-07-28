@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import NameCard from './NameCard';
 import Graph from './Graph';
-import TopCountries from './TopCountries';
-import Segmentation from './Segmentation';
-import Satisfaction from './Satisfaction';
+import TicketAnalysis from './TicketAnalysis';
+import Piechart from './Piechart';
+import Size from './Size';
 import AddComponent from './AddComponent';
 import Icon from './Icon';
 import IconButton from './IconButton';
@@ -34,7 +34,7 @@ const DashboardContent = ({ onSidebarHide }) => {
                             onClick={onSidebarHide}
                         />
                     </div>
-                    <div className="w-full sm:w-56 mt-4 sm:mt-0 relative">
+                    {/* <div className="w-full sm:w-56 mt-4 sm:mt-0 relative">
                         <Icon path="res-react-dash-search" className="w-5 h-5 search-icon left-3 absolute" />
                         <form action="#" method="POST">
                             <input
@@ -45,7 +45,7 @@ const DashboardContent = ({ onSidebarHide }) => {
                                 placeholder="search"
                             />
                         </form>
-                    </div>
+                    </div> */}
                 </div>
                 {compressionData && compressionData.map((algorithm) => (
                     <NameCard key={algorithm.name} {...algorithm} />
@@ -57,17 +57,17 @@ const DashboardContent = ({ onSidebarHide }) => {
                 </div>
                 <div className="w-full p-2 lg:w-1/3">
                     <div className="rounded-lg bg-card h-80">
-                        <TopCountries />
+                        <TicketAnalysis />
                     </div>
                 </div>
                 <div className="w-full p-2 lg:w-1/3">
                     <div className="rounded-lg bg-card h-80">
-                        <Segmentation />
+                        <Piechart />
                     </div>
                 </div>
                 <div className="w-full p-2 lg:w-1/3">
                     <div className="rounded-lg bg-card h-80">
-                        <Satisfaction />
+                        <Size />
                     </div>
                 </div>
                 <div className="w-full p-2 lg:w-1/3">

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import {
-    LineChart,
-    Line,
+    BarChart,
+    Bar,
     XAxis,
     YAxis,
     CartesianGrid,
@@ -67,7 +67,7 @@ const Graph = () => {
             </div>
             <div className="flex-grow">
                 <ResponsiveContainer width="100%" height="100%">
-                    <LineChart width={500} height={300} data={data}>
+                    <BarChart width={500} height={300} data={data}>
                         <defs>
                             <linearGradient id="paint0_linear" x1="0" y1="0" x2="1" y2="0">
                                 <stop stopColor="#6B8DE3" />
@@ -87,10 +87,10 @@ const Graph = () => {
                         <YAxis axisLine={false} tickLine={false} tickMargin={10} />
                         <Tooltip content={<CustomTooltip />} cursor={false} />
                         <Legend />
-                        <Line type="monotone" dataKey="avgCompressionRatio" stroke="url(#paint0_linear)" strokeWidth="3" dot={false} />
-                        <Line type="monotone" dataKey="avgCompressionTime" stroke="url(#paint1_linear)" strokeWidth="3" dot={false} />
-                        <Line type="monotone" dataKey="avgDecompressionTime" stroke="url(#paint2_linear)" strokeWidth="3" dot={false} />
-                    </LineChart>
+                        <Bar dataKey="avgCompressionRatio" fill="url(#paint0_linear)" />
+                        <Bar dataKey="avgCompressionTime" fill="url(#paint1_linear)" />
+                        <Bar dataKey="avgDecompressionTime" fill="url(#paint2_linear)" />
+                    </BarChart>
                 </ResponsiveContainer>
             </div>
         </div>

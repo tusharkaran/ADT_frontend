@@ -9,8 +9,8 @@ import Image from './Image';
 const sidebarItems = [
     [
         { id: '0', title: 'Dashboard', notifications: false },
-        { id: '1', title: 'Archival Tickets', notifications: false },
-        { id: '2', title: 'Tickets', notifications: false },
+        { id: '1', title: 'Tickets', notifications: false },
+        { id: '2', title: 'Archived Tickets', notifications: false },
     ],
 ];
 
@@ -74,7 +74,7 @@ const Sidebar = ({ onSidebarHide, showSidebar, onSelectSection }) => {
                                 "url('https://assets.codepen.io/3685267/res-react-dash-usage-card.svg')",
                         }}
                     >
-                        <div className="block sm:hidden xl:block pt-3">
+                        {/* <div className="block sm:hidden xl:block pt-3">
                             <div className="font-bold text-gray-300 text-sm">Used Space</div>
                             <div className="text-gray-500 text-xs">
                                 Admin updated 09:12 am November 08,2020
@@ -88,7 +88,7 @@ const Sidebar = ({ onSidebarHide, showSidebar, onSelectSection }) => {
                                     <animated.line x1="5" y1="5.25" x2={indicatorWidth} y2="5.25" stroke="currentColor" strokeWidth="5" strokeLinecap="round" />
                                 </svg>
                             </div>
-                        </div>
+                        </div> */}
                         <div className="hidden sm:block xl:hidden ">
                             <svg width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <rect width="56" height="56" fill="#2C2C2D" />

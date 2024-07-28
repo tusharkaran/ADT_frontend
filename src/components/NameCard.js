@@ -21,10 +21,10 @@ const NameCard = ({ name, position, totalTickets, tasksCompleted, avgCompression
                             <div className="text-sm">{position}</div>
                         </div>
                     </div>
-                    <div className="text-sm mt-2">{`${tasksCompleted} from 5 tasks completed`}</div>
+                    <div className="text-sm mt-2">{`${tasksCompleted} from ${totalTickets} Tickets`}</div>
                     <svg className="w-44 mt-3" height="6" viewBox="0 0 200 6" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <rect width="200" height="6" rx="3" fill="#2D2D2D" />
-                        <rect width={(tasksCompleted / 5) * 200} height="6" rx="3" fill={`url(#${gradientId})`} />
+                        <rect width={(tasksCompleted / totalTickets) * 200} height="6" rx="3" fill={`url(#${gradientId})`} />
                         <rect x="38" width="2" height="6" fill="#171717" />
                         <rect x="78" width="2" height="6" fill="#171717" />
                         <rect x="118" width="2" height="6" fill="#171717" />

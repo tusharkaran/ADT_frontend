@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 
-const Segmentation = () => {
+const Piechart = () => {
     const [chartData, setChartData] = useState([]);
     const [loading, setLoading] = useState(true);
 
@@ -13,10 +13,10 @@ const Segmentation = () => {
                 const data = await response.json();
                 const totalTickets = data.totalTicket;
                 const totalArchiveTickets = data.totalArchiveTickets;
-                const totalNormalTickets = totalTickets - totalArchiveTickets;
+                const totalNormalTickets = totalTickets + totalArchiveTickets;
 
-                const archivePercentage = (totalArchiveTickets / totalTickets) * 100;
-                const normalPercentage = (totalNormalTickets / totalTickets) * 100;
+                const archivePercentage = (totalArchiveTickets / totalNormalTickets) * 100;
+                const normalPercentage = (totalTickets / totalNormalTickets) * 100;
 
                 setChartData([
                     { name: 'Archival Tickets', y: archivePercentage },
@@ -95,4 +95,4 @@ const Segmentation = () => {
     );
 };
 
-export default Segmentation;
+export default Piechart;

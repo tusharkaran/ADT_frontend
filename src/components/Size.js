@@ -9,7 +9,7 @@ const map = (value, sMin, sMax, dMin, dMax) => {
     return dMin + ((value - sMin) / (sMax - sMin)) * (dMax - dMin);
 };
 
-const Satisfaction = () => {
+const Size = () => {
     const [totalValue, setTotalValue] = useState(1024);
     const [actualValue, setActualValue] = useState(423);
     const [percentageValue, setPercentageValue] = useState(40);
@@ -91,4 +91,4 @@ const Satisfaction = () => {
     );
 };
 
-export default Satisfaction;
+export default Size;
